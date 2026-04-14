@@ -234,7 +234,7 @@
     font-weight: 700;
     color: #a83866;
     line-height: 1;
-    transition: color 250ms ease 1550ms;
+    transition: color 250ms ease;
   }
   .num-btn:not(.depleted) .num { transition: color 150ms ease; }
   .num-btn:hover .num { color: #7a2446; }
@@ -798,8 +798,22 @@ function resetTimer() {
   document.body.classList.remove('game-started');
 }
 
+function pickChapter() {
+  const RECENT_KEY = 'sudoku.recentChapters';
+  const WINDOW = 20;
+  let recent = [];
+  try { recent = JSON.parse(localStorage.getItem(RECENT_KEY)) || []; } catch {}
+  const pool = [];
+  for (let i = 1; i <= 81; i++) if (!recent.includes(i)) pool.push(i);
+  const n = pool[Math.floor(Math.random() * pool.length)];
+  recent.push(n);
+  while (recent.length > WINDOW) recent.shift();
+  try { localStorage.setItem(RECENT_KEY, JSON.stringify(recent)); } catch {}
+  return n;
+}
+
 async function showFinished() {
-  const n = 1 + Math.floor(Math.random() * 81);
+  const n = pickChapter();
   const nn = String(n).padStart(2, '0');
   let text = '';
   try {
@@ -830,7 +844,12 @@ async function showFinished() {
   const letterEnd = letterStart + (ci > 0 ? (ci - 1) * letterStagger : 0) + letterDur;
   document.querySelector('.finished-author').style.animationDelay = (letterEnd + 300) + 'ms';
   document.querySelector('.finished-dots').style.animationDelay = (letterEnd + 900) + 'ms';
+  selected = null;
+  document.querySelectorAll('.cell').forEach(c => {
+    c.classList.remove('selected', 'peer', 'same-num', 'wrong');
+  });
   document.body.classList.add('finishing');
+  if (__bgHandle && __bgHandle.celebrate) __bgHandle.celebrate();
   setTimeout(() => {
     document.body.classList.remove('finishing');
     document.body.classList.add('finished');
@@ -944,6 +963,7 @@ function buildPad() {
 }
 
 function updatePad() {
+  if (document.body.classList.contains('finishing')) return;
   const counts = [0,0,0,0,0,0,0,0,0,0];
   for (const c of cells) if (c.big != null) counts[c.big]++;
   for (const btn of pad.children) {
@@ -1252,12 +1272,13 @@ document.getElementById('hint-btn').addEventListener('click', () => {
 });
 
 
-import { startRandomBackground } from './animations.js?v=11';
+import { startRandomBackground } from './animations.js?v=12';
 const __bg = document.getElementById('bg');
 __bg.style.opacity = '0';
 __bg.style.transition = 'opacity 800ms ease';
+let __bgHandle = null;
 setTimeout(() => {
-  startRandomBackground(__bg);
+  __bgHandle = startRandomBackground(__bg);
   requestAnimationFrame(() => { __bg.style.opacity = '1'; });
 }, 700);
 
@@ -1301,6 +1322,10 @@ let transitioning = false;
 function softRefresh(action) {
   if (transitioning) return;
   transitioning = true;
+  selected = null;
+  document.querySelectorAll('.cell').forEach(c => {
+    c.classList.remove('selected', 'peer', 'same-num');
+  });
   document.body.classList.remove('reassembling');
   document.body.classList.add('disassembling');
   setTimeout(() => {

@@ -59,19 +59,24 @@ function flowingPattern(canvas) {
   let t = 0;
   let raf = null;
   let running = false;
+  let celebrateUntil = 0;
 
   function frame() {
+    const now = performance.now();
+    const boosting = now < celebrateUntil;
+    const boost = boosting ? 1 + (celebrateUntil - now) / 2500 : 1;
+
     ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
     ctx.fillRect(0, 0, w, h);
 
-    t += 0.005;
+    t += 0.005 * boost;
 
     for (let i = 0; i < points.length; i++) {
       const p = points[i];
       const n = noise(p.x, p.y, t);
       const angle = n * Math.PI * 4;
-      p.vx = (p.vx + Math.cos(angle) * 0.1) * 0.95;
-      p.vy = (p.vy + Math.sin(angle) * 0.1) * 0.95;
+      p.vx = (p.vx + Math.cos(angle) * 0.1 * boost) * 0.95;
+      p.vy = (p.vy + Math.sin(angle) * 0.1 * boost) * 0.95;
 
       const nx = p.x + p.vx;
       const ny = p.y + p.vy;
@@ -153,14 +158,43 @@ function flowingPattern(canvas) {
   }
   document.addEventListener('visibilitychange', onVisibility);
 
-  return () => {
-    stop();
-    window.removeEventListener('resize', resize);
-    document.removeEventListener('visibilitychange', onVisibility);
+  function celebrate() {
+    celebrateUntil = performance.now() + 2500;
+    const burstCount = 3;
+    for (let b = 0; b < burstCount; b++) {
+      const cx = Math.random() * w;
+      const cy = Math.random() * h;
+      const cols = 7 + Math.floor(Math.random() * 4);
+      const rows = 7 + Math.floor(Math.random() * 4);
+      const startX = cx - (cols * gridSize) / 2;
+      const startY = cy - (rows * gridSize) / 2;
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          const x = startX + (i + 0.5) * gridSize;
+          const y = startY + (j + 0.5) * gridSize;
+          if (x < 0 || x > w || y < 0 || y > h) continue;
+          const ang = Math.random() * Math.PI * 2;
+          points.push({ x, y, vx: Math.cos(ang) * 0.8, vy: Math.sin(ang) * 0.8 });
+        }
+      }
+    }
+    const maxPoints = Math.ceil(initialCount * 1.4);
+    if (points.length > maxPoints) {
+      points.splice(initialCount, points.length - maxPoints);
+    }
+  }
+
+  return {
+    stop: () => {
+      stop();
+      window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', onVisibility);
+    },
+    celebrate,
   };
 }
 
 export function startRandomBackground(canvas) {
-  const stop = flowingPattern(canvas);
-  return { n: 39, stop };
+  const handle = flowingPattern(canvas);
+  return { n: 39, stop: handle.stop, celebrate: handle.celebrate };
 }
