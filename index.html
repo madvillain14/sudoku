@@ -250,7 +250,11 @@
     transition: opacity 320ms ease, background 150ms ease;
   }
   .num-btn .dot.used { opacity: 0; }
-  body.revealing .num-btn .dot.used { opacity: 1; }
+  body.revealing .num-btn .dot.used {
+    animation: dotUnload 300ms ease-out both;
+    animation-delay: calc(800ms + var(--dot-ccw, 0) * 150ms);
+  }
+  body.revealing .num-btn .dot { transition: none; }
   .num-btn.depleted { cursor: not-allowed; }
   .num-btn.depleted .num { color: #bbb; }
   .num-btn.depleted:hover .num { color: #bbb; }
