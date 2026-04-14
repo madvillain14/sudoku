@@ -2,7 +2,7 @@
 
 A minimal, single-page sudoku game with a pink flow-field background and a Tao Te Ching chapter shown on completion.
 
-**Play it here:** https://<your-username>.github.io/sudoku/
+**Play it here:** https://madvillain14.github.io/sudoku/
 
 No build step, no dependencies — just static HTML, CSS, and vanilla JS.
 
