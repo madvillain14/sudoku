@@ -1,0 +1,8 @@
+# Chapter 6
+
+The spirit of emptiness is immortal.
+It is called the Great Mother
+because it gives birth to Heaven and Earth.
+It is like a vapor,
+barely seen but always present.
+Use it effortlessly.

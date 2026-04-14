@@ -1,0 +1,15 @@
+# Chapter 34
+
+The great Tao flows unobstructed in every direction.
+All things rely on it to conceive and be born,
+and it does not deny even the smallest of creation.
+When it has accomplishes great wonders,
+it does not claim them for itself.
+It nourishes infinite worlds,
+yet it doesn't seek to master the smallest creature.
+Since it is without wants and desires,
+it can be considered humble.
+All of creation seeks it for refuge
+yet it does not seek to master or control.
+Because it does not seek greatness;
+it is able to accomplish truly great things.

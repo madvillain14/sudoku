@@ -1,0 +1,15 @@
+# Chapter 8
+
+The supreme good is like water,
+which benefits all of creation
+without trying to compete with it.
+It gathers in unpopular places.
+Thus it is like the Tao.
+The location makes the dwelling good.
+Depth of understanding makes the mind good.
+A kind heart makes the giving good.
+Integrity makes the government good.
+Accomplishments make your labors good.
+Proper timing makes a decision good.
+Only when there is no competition
+will we all live in peace.

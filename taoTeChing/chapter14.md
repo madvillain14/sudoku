@@ -1,0 +1,18 @@
+# Chapter 14
+
+Look for it, and it can't be seen.
+Listen for it, and it can't be heard.
+Grasp for it, and it can't be caught.
+These three cannot be further described,
+so we treat them as The One.
+It's highest is not bright.
+It's depths are not dark.
+Unending, unnameable, it returns to nothingness.
+Formless forms, and image less images,
+subtle, beyond all understanding.
+Approach it and you will not see a beginning;
+follow it and there will be no end.
+When we grasp the Tao of the ancient ones,
+we can use it to direct our life today.
+To know the ancient origin of Tao:
+this is the beginning of wisdom.

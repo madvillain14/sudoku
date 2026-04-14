@@ -1,0 +1,10 @@
+# Chapter 75
+
+When people go hungry,
+the governments taxes are too high.
+When people become rebellious,
+the government has become too intrusive.
+When people begin to view death lightly,
+wealthy people have too much
+which causes others to starve.
+Only those who do not cling to their life can save it.

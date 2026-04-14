@@ -1,0 +1,6 @@
+# Chapter 40
+
+All movement returns to the Tao.
+Weakness is how the Tao works.
+All of creation is born from substance.
+Substance is born of nothing-ness.
