@@ -428,7 +428,7 @@
   }
   body.disassembling .num-btn .dot.used {
     animation: dotReload 300ms ease-out both;
-    animation-delay: calc(1200ms + var(--dot-ccw, 0) * 150ms);
+    animation-delay: calc(1200ms + var(--dot-cw, 0) * 150ms);
   }
   body.reassembling .cell .big {
     animation: bigReveal 300ms ease-out both;
@@ -495,7 +495,7 @@
   }
   body.finishing .num-btn .dot.used {
     animation: dotReload 300ms ease-out both;
-    animation-delay: calc(var(--dot-seq, 0) * 140ms);
+    animation-delay: calc(var(--dot-cw, 0) * 140ms);
   }
   body.finishing .num-btn .dot { transition: none; }
 
@@ -954,6 +954,7 @@ function buildPad() {
       const a = (k / 9) * Math.PI * 2 - Math.PI / 2;
       d.style.left = `calc(50% + ${Math.cos(a) * 32}%)`;
       d.style.top = `calc(50% + ${Math.sin(a) * 32}%)`;
+      d.style.setProperty('--dot-cw', k);
       d.style.setProperty('--dot-ccw', 8 - k);
       dots.appendChild(d);
     }
