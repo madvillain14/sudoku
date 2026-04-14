@@ -27,6 +27,7 @@ function flowingPattern(canvas) {
   let { ctx, w, h } = fitCanvas(canvas);
   const gridSize = 22;
   let points = [];
+  let initialCount = 0;
   function rebuild() {
     points = [];
     for (let x = gridSize / 2; x < w; x += gridSize) {
@@ -34,6 +35,7 @@ function flowingPattern(canvas) {
         points.push({ x, y, vx: 0, vy: 0 });
       }
     }
+    initialCount = points.length;
   }
   rebuild();
 
@@ -122,6 +124,10 @@ function flowingPattern(canvas) {
           if (x < 0 || x > w || y < 0 || y > h) continue;
           points.push({ x, y, vx: 0, vy: 0 });
         }
+      }
+      const maxPoints = Math.ceil(initialCount * 1.4);
+      if (points.length > maxPoints) {
+        points.splice(initialCount, points.length - maxPoints);
       }
       scheduleSpawn();
     }, delay);

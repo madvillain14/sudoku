@@ -322,7 +322,7 @@
     pointer-events: none;
     z-index: 2;
   }
-  .gl { position: absolute; background: #000; }
+  .gl { position: absolute; background: #000; will-change: transform; backface-visibility: hidden; }
   .gl-v1 { left: calc(var(--cell) * 3); top: 0; bottom: 0; width: 2px; transform: translateX(-1px); }
   .gl-v2 { left: calc(var(--cell) * 6); top: 0; bottom: 0; width: 2px; transform: translateX(-1px); }
   .gl-h1 { top: calc(var(--cell) * 3); left: 0; right: 0; height: 2px; transform: translateY(-1px); }
@@ -957,9 +957,8 @@ function updatePad() {
       const used = i >= remaining;
       d.classList.toggle('used', used);
       if (used) {
-        const outSeq = 8 - i;
         const inSeq = i - remaining;
-        d.style.transitionDelay = (outSeq * 150) + 'ms';
+        d.style.transitionDelay = '0ms';
         d.style.setProperty('--dot-seq', inSeq);
       } else {
         d.style.transitionDelay = '0ms';
